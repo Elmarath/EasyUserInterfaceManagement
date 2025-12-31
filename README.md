@@ -1,2 +1,2 @@
 # EasyUserInterfaceManagement
-Unreal Engine Plugin that is an extension of Common UI. Aims to improve developer's speed to create modular UI workflows.
+Lyra Inspired Unreal Engine Plugin that is an extension of Common UI. Aims to improve developer's speed to create modular UI workflows while using the Common UI in its full extend.
