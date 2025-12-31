@@ -1,4 +1,4 @@
-﻿// Copyright Elmarath Studio 2025
+﻿// Copyright Elmarath Studio 2025 All Rights Reserved.
 
 #pragma once
 
@@ -9,6 +9,9 @@
 class UWidget;
 /**
  * Action base for button click events in the Easy User Interface Management system.
+ * It simplifies the process of adding custom functionality to button click events by allowing developers to create
+ * instances of this class and implement the ExecuteAction function.
+ * This promotes modularity and reusability of button click actions across different buttons and widgets.
  */
 UCLASS(BlueprintType, Blueprintable, EditInlineNew, DefaultToInstanced, ClassGroup = (UI), meta = (BlueprintSpawnableComponent), Abstract, CollapseCategories, meta= (ShowWorldContextPin))
 class EASYUSERINTERFACEMANAGEMENT_API UCommonButtonClickActionBase : public UObject

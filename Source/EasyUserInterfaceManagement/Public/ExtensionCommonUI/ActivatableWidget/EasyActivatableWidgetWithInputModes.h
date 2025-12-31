@@ -1,4 +1,4 @@
-﻿// Copyright Elmarath Studio 2025
+﻿// Copyright Elmarath Studio 2025 All Rights Reserved.
 
 #pragma once
 
@@ -16,6 +16,9 @@ enum class ECommonActivatableWidgetInputMode : uint8
 	Menu UMETA(DisplayName = "Menu"), // Menu will receive input, game will not
 };
 
+/**
+ * Object that simplifies the configuration of input modes for UCommonActivatableWidget derived widgets.
+ */
 UCLASS(BlueprintType, Blueprintable, EditInlineNew, DefaultToInstanced, ClassGroup = ("User Interface"), meta = (BlueprintSpawnableComponent), CollapseCategories)
 class UUserInterfaceCommonInputModeSet : public UObject
 {
@@ -31,15 +34,16 @@ public:
 	}
 
 protected:
+	/** The input mode to be applied when the widget is activated */
 	UPROPERTY(EditDefaultsOnly, Category = Input)
 	ECommonActivatableWidgetInputMode InputMode = ECommonActivatableWidgetInputMode::Default;
-	
+	/** The mouse lock mode to be applied when the widget is activated (only applies if InputMode is not Default) */
 	UPROPERTY(EditDefaultsOnly, Category = Input, meta = (EditCondition = "InputMode != ECommonActivatableWidgetInputMode::Default"))
 	EMouseLockMode GameMouseLockMode = EMouseLockMode::DoNotLock;
-	
+	/** The mouse capture mode to be applied when the widget is activated (only applies if InputMode is Game or GameAndMenu) */
 	UPROPERTY(EditDefaultsOnly, Category = Input, meta = (EditCondition = "InputMode != ECommonActivatableWidgetInputMode::Default || InputMode != ECommonActivatableWidgetInputMode::Menu"))
 	EMouseCaptureMode GameMouseCaptureMode = EMouseCaptureMode::CapturePermanently;
-
+	/** Whether to hide the cursor during viewport capture (only applies if InputMode is Game or GameAndMenu) */
 	UPROPERTY(EditDefaultsOnly, Category = Input, meta = (EditCondition = "InputMode != ECommonActivatableWidgetInputMode::Default || InputMode != ECommonActivatableWidgetInputMode::Menu"))
 	bool bHideCursorDuringViewportCapture = false;
 
@@ -63,7 +67,7 @@ public:
 };
 
 /**
- * 
+ * An activatable widget that simplifies the management of input modes by its settings.
  */
 UCLASS()
 class EASYUSERINTERFACEMANAGEMENT_API UEasyActivatableWidgetWithInputModes : public UCommonActivatableWidget

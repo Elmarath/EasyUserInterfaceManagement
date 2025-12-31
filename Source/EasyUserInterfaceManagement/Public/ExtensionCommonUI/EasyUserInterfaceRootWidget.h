@@ -1,4 +1,4 @@
-// Copyright Elmarath Studio 2025
+// Copyright Elmarath Studio 2025 All Rights Reserved.
 
 #pragma once
 
@@ -63,6 +63,7 @@ public:
 	virtual void NativeConstruct() override;
 
 private:
+	/** Internal map of registered widget stacks by their layer tags */
 	UPROPERTY()
 	TMap<FGameplayTag, UCommonActivatableWidgetStack*> WidgetStacks;
 
@@ -102,18 +103,30 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintType, Category = "Root Widget|Notification", meta = (Categories = "UI.NotificationType"))
 	bool UnRegisterNotificationPanel(const FGameplayTag& LayerTag);
-	
+
+	/**
+	 * Retrieves the notification panel associated with the specified layer tag.
+	 * @param LayerTag The tag representing the notification panel layer. Note: Simple View: "UI.NotificationType.SimpleView"
+	 * @return The widget representing the notification panel for the specified layer tag, or nullptr if not found.
+	 */
 	UFUNCTION(BlueprintPure, BlueprintType, Category = "Root Widget|Notification", meta = (Categories = "UI.NotificationType"))
 	UWidget* GetNotificationPanel(const FGameplayTag& LayerTag) const;
 
 public:
+	/**
+	 * Adds a notification widget to the specified notification panel with given info.
+	 * @param LayerTag The tag representing the notification panel layer. Note: Simple View: "UI.NotificationType.SimpleView"
+	 * @param NotificationWidget The notification widget to add to the panel.
+	 * @param InNotificationInfo The information struct containing details about the notification.
+	 */
 	UFUNCTION(BlueprintCallable, BlueprintType, Category = "Root Widget")
 	void AddNotificationWidgetToPanel(FGameplayTag LayerTag, UEasyNotificationWidget* NotificationWidget, const FEasyNotificationWidgetInfo& InNotificationInfo);
 	
 private:
+	/** Internal Loading Widget Param */
 	UPROPERTY()
 	FPushWidgetToStackAsyncParams LoadingWidgetParams;
-
+	/** Internal map of Registered Notification panels to display notifications inside */
 	UPROPERTY()
 	TMap<FGameplayTag, UWidget*> NotificationPanels;
 };

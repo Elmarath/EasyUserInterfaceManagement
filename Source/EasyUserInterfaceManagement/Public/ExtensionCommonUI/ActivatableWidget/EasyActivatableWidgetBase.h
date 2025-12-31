@@ -1,4 +1,4 @@
-﻿// Copyright Elmarath Studio 2025
+﻿// Copyright Elmarath Studio 2025 All Rights Reserved.
 
 #pragma once
 
@@ -15,6 +15,8 @@ struct FInputActionBindingHandle
 	GENERATED_BODY()
 	
 public:
+	/** The handle to the input binding. */
+	UPROPERTY(BlueprintReadWrite, Category = "Input")
 	FUIActionBindingHandle Handle;
 
 public:
@@ -49,6 +51,12 @@ struct FUserInterfaceInputActionToRegister
 	bool bForceHold = false;
 
 	/**
+	 * The key event to bind to.
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	TEnumAsByte<EInputEvent> KeyEvent = IE_Pressed;
+
+	/**
 	 * True to have this binding consume the triggering key input.
 	 * Persistent bindings that consume will prevent the key reaching non-persistent bindings and game agents.
 	 * Non-persistent bindings that consume will prevent the key reaching game agents.
@@ -66,6 +74,8 @@ struct FUserInterfaceInputActionToRegister
 
 /**
  * Base class for activatable widgets that can register and unregister input actions and setup easy input modes when activated.
+ * The main responsibility of this widget is to manage input bindings and modes when the widget is activated or deactivated,
+ * and create/destroy the input bindings at runtime as needed.
  */
 UCLASS()
 class EASYUSERINTERFACEMANAGEMENT_API UEasyActivatableWidgetBase : public UEasyActivatableWidgetWithInputModes
@@ -120,10 +130,17 @@ protected:
 	 */
 	UFUNCTION(BlueprintCallable, Category = ExtendedActivatableWidget)
 	void UnregisterBinding(FInputActionBindingHandle BindingHandle);
-
+	/**
+	 * Unregisters all bindings that were registered by this widget.
+	 */
 	UFUNCTION(BlueprintCallable, Category = ExtendedActivatableWidget)
 	void UnregisterAllBindings();
-
+	/**
+	 * Checks if a binding is already registered.
+	 * @param BindingHandle The handle to the binding to check.
+	 * @param bIsBindingValid Output parameter that indicates if the binding handle is valid.
+	 * @return True if the binding is already registered, false otherwise.
+	 */
 	UFUNCTION(BlueprintPure, Category = ExtendedActivatableWidget)
 	bool IsBindingAlreadyRegistered(const FInputActionBindingHandle& BindingHandle, bool& bIsBindingValid) const
 	{

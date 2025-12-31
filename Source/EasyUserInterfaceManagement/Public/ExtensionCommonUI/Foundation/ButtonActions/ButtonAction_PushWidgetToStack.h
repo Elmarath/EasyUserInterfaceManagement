@@ -1,5 +1,4 @@
-﻿// Copyright Elmarath Studio 2025
-
+﻿// Copyright Elmarath Studio 2025 All Rights Reserved.
 #pragma once
 
 #include "CoreMinimal.h"
@@ -9,7 +8,7 @@
 
 class UCommonActivatableWidget;
 /**
- * 
+ * Button Action to Push a Widget to a specified Widget Stack Layer in the Easy User Interface Management system.
  */
 UCLASS(DisplayName = "Push Widget")
 class EASYUSERINTERFACEMANAGEMENT_API UButtonAction_PushWidgetToStack : public UCommonButtonClickActionBase

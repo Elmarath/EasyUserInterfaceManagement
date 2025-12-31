@@ -1,4 +1,4 @@
-// Copyright Elmarath Studio 2025
+// Copyright Elmarath Studio 2025 All Rights Reserved.
 
 #pragma once
 
@@ -44,6 +44,16 @@ public:
 	TObjectPtr<UCommonButtonClickActionBase> ButtonClickAction;
 
 public:
+	// Custom event for cancelled holds
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnHoldCancelled);
+	UPROPERTY(BlueprintAssignable, Category = "Button")
+	FOnHoldCancelled OnHoldCancelled;
+	UFUNCTION(BlueprintImplementableEvent, Category = "Button", meta = (DisplayName = "On Hold Cancelled"))
+	void OnHoldCancelled_BP();
+protected:
+	virtual void NativeOnReleased() override;
+	
+public:
 	UPROPERTY(meta = (BindWidgetOptional), BlueprintReadWrite, Category = "Button")
 	TObjectPtr<UCommonTextBlock> ButtonTextWidget;
 
@@ -54,7 +64,7 @@ public:
 	FText ButtonText;
 
 	// should be a texture or a material
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Button", meta=(ExposeOnSpawn), meta = (AllowedClasses = "Texture2D,MaterialInterface"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Button", meta=(ExposeOnSpawn), meta = (AllowedClasses = "/Script/Engine.Texture2D,/Script/Engine.MaterialInterface"))
 	TSoftObjectPtr<UObject> ButtonDisplayAsset;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Button", meta=(ExposeOnSpawn))

@@ -1,4 +1,4 @@
-﻿// Copyright Elmarath Studio 2025
+﻿// Copyright Elmarath Studio 2025 All Rights Reserved.
 
 
 #include "ExtensionCommonUI/Foundation/ButtonActions/ButtonAction_AddNotification.h"

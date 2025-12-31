@@ -1,5 +1,4 @@
-﻿// Copyright Elmarath Studio 2025
-
+﻿// Copyright Elmarath Studio 2025 All Rights Reserved.
 
 #include "ExtensionCommonUI/Foundation/ButtonActions/ButtonAction_PushWidgetToStack.h"
 
@@ -23,7 +22,7 @@ void UButtonAction_PushWidgetToStack::ExecuteAction_Implementation(UWidget* Inst
 	}
 
 	// Get Local Player Subsystem
-	const UEasyUserInterfaceManager* Manager = InstigatorWidget->GetOwningLocalPlayer()->GetSubsystem<UEasyUserInterfaceManager>();
+	UEasyUserInterfaceManager* Manager = InstigatorWidget->GetOwningLocalPlayer()->GetSubsystem<UEasyUserInterfaceManager>();
 	const FOnWidgetUpdatedOnStack WidgetAddedDelegate;
 	Manager->PushWidgetToStackAsync(LayerTag, WidgetToPush, WidgetAddedDelegate);
 }

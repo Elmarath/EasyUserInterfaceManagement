@@ -1,4 +1,4 @@
-﻿// Copyright Elmarath Studio 2025
+﻿// Copyright Elmarath Studio 2025 All Rights Reserved.
 
 #pragma once
 
@@ -9,7 +9,7 @@
 #include "ButtonAction_AddNotification.generated.h"
 
 /**
- * 
+ * Button Action to add a notification to the notification panel
  */
 UCLASS(DisplayName= "Add Notification")
 class EASYUSERINTERFACEMANAGEMENT_API UButtonAction_AddNotification : public UCommonButtonClickActionBase

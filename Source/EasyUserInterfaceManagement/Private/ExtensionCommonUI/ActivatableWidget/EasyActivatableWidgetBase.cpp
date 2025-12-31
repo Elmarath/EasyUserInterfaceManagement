@@ -1,4 +1,4 @@
-﻿// Copyright Elmarath Studio 2025
+﻿// Copyright Elmarath Studio 2025 All Rights Reserved.
 
 
 #include "ExtensionCommonUI/ActivatableWidget/EasyActivatableWidgetBase.h"
@@ -56,7 +56,7 @@ void UEasyActivatableWidgetBase::NativeOnActivated()
 void UEasyActivatableWidgetBase::NativeOnDeactivated()
 {
 	UnregisterAllBindings();
-	if (IsValid(GetOwningLocalPlayer()))
+	if (IsValid(GetOwningLocalPlayer()) && GetOwningLocalPlayer()->GetSubsystem<UEasyCommonUIActionRouter>())
 	{
 		UEasyCommonUIActionRouter* CommonUIActionRouter = GetOwningLocalPlayer()->GetSubsystem<UEasyCommonUIActionRouter>();
 		CommonUIActionRouter->SetAnalogMovementEnabled(false);
@@ -79,6 +79,7 @@ void UEasyActivatableWidgetBase::RegisterBinding(FUserInterfaceInputActionToRegi
 	BindArgs.bForceHold = InputAction.bForceHold;
 	BindArgs.bConsumeInput = InputAction.bConsumeInput;
 	BindArgs.OverrideDisplayName = InputAction.OverrideDisplayName;
+	BindArgs.KeyEvent = InputAction.KeyEvent;
 	// Register and store the handle
 	BindingHandle.Handle = RegisterUIActionBinding(BindArgs);
 	BindingHandles.Add(BindingHandle.Handle);

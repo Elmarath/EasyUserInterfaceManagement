@@ -1,8 +1,9 @@
-// Copyright Elmarath Studio 2025
-
+// Copyright Elmarath Studio 2025 All Rights Reserved.
 
 #include "ExtensionCommonUI/Foundation/EasyCommonButtonExtended.h"
 
+#include "CommonActionWidget.h"
+#include "EasyUserInterfaceManagement.h"
 #include "ExtensionCommonUI/Foundation/ButtonActions/CommonButtonClickActionBase.h"
 
 UEasyCommonButtonExtended::UEasyCommonButtonExtended()
@@ -68,6 +69,17 @@ void UEasyCommonButtonExtended::RemoveMetadataWithID(FName MetadataID)
 	}
 
 	MetadataMap.Remove(MetadataID);
+}
+
+void UEasyCommonButtonExtended::NativeOnReleased()
+{
+	// Check if this was a hold interaction that didn't complete
+	if (CurrentHoldProgress > 0.f && CurrentHoldProgress < 1.f)
+	{
+		OnHoldCancelled.Broadcast();
+		OnHoldCancelled_BP();
+	}
+	Super::NativeOnReleased();
 }
 
 void UEasyCommonButtonExtended::RefreshButton()

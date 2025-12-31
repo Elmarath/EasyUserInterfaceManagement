@@ -1,4 +1,4 @@
-﻿// Copyright Elmarath Studio 2025
+﻿// Copyright Elmarath Studio 2025 All Rights Reserved.
 
 #pragma once
 
@@ -8,7 +8,7 @@
 #include "ButtonAction_PushQuestionPrompt.generated.h"
 
 /**
- * 
+ * Button Action to Push a Question Prompt Widget onto the specified Root Stack Layer.
  */
 UCLASS(DisplayName= "Push Question Prompt")
 class EASYUSERINTERFACEMANAGEMENT_API UButtonAction_PushQuestionPrompt : public UCommonButtonClickActionBase

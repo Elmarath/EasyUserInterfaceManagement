@@ -1,4 +1,4 @@
-﻿// Copyright Elmarath Studio 2025
+﻿// Copyright Elmarath Studio 2025 All Rights Reserved.
 
 #pragma once
 
@@ -7,7 +7,7 @@
 #include "ButtonAction_ExecuteConsoleCommand.generated.h"
 
 /**
- * 
+ * Button Action that executes a console command when triggered.
  */
 UCLASS(DisplayName="Execute Console Command")
 class EASYUSERINTERFACEMANAGEMENT_API UButtonAction_ExecuteConsoleCommand : public UCommonButtonClickActionBase

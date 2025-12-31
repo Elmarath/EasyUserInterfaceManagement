@@ -1,4 +1,4 @@
-﻿// Copyright Elmarath Studio 2025
+﻿// Copyright Elmarath Studio 2025 All Rights Reserved.
 
 
 #include "EasyUserInterfaceManagement/EasyUserInterfaceManager.h"
@@ -61,16 +61,17 @@ UEasyUserInterfaceRootWidget* UEasyUserInterfaceManager::GetRootWidget()
 	return RootWidget;
 }
 
-void UEasyUserInterfaceManager::PushWidgetToStackAsync(FGameplayTag LayerTag,
-	TSoftClassPtr<UCommonActivatableWidget> InWidget, FOnWidgetUpdatedOnStack OnWidgetAdded) const
+bool UEasyUserInterfaceManager::PushWidgetToStackAsync(FGameplayTag LayerTag,
+	TSoftClassPtr<UCommonActivatableWidget> InWidget, FOnWidgetUpdatedOnStack OnWidgetAdded)
 {
 	if (!RootWidget)
 	{
 		UE_LOG(LogEasyUserInterfaceManagement, Error, TEXT("Root widget is not registered. Cannot push widget to stack."));
-		return;
+		return false;
 	}
 	
 	RootWidget->PushWidgetToStackAsync(LayerTag, InWidget, OnWidgetAdded);
+	return true;
 }
 
 UCommonActivatableWidgetStack* UEasyUserInterfaceManager::GetWidgetStackFromRoot(FGameplayTag LayerTag) const
@@ -90,7 +91,7 @@ UCommonActivatableWidgetStack* UEasyUserInterfaceManager::GetWidgetStackFromRoot
 	return nullptr;
 }
 
-void UEasyUserInterfaceManager::AddNotificationToPanel(
+bool UEasyUserInterfaceManager::AddNotificationToPanel(
 	FGameplayTag LayerTag,
 	TSoftClassPtr<UEasyNotificationWidget> NotificationWidgetClass,
 	const FEasyNotificationWidgetInfo& NotificationInfo,
@@ -99,7 +100,7 @@ void UEasyUserInterfaceManager::AddNotificationToPanel(
 	if (!RootWidget)
 	{
 		UE_LOG(LogEasyUserInterfaceManagement, Error, TEXT("Root widget is not registered. Cannot add notification to panel."));
-		return;
+		return false;
 	}
 
 	// Make a copy of the soft class pointer so we can resolve it inside the lambda
@@ -123,6 +124,7 @@ void UEasyUserInterfaceManager::AddNotificationToPanel(
 				UEasyNotificationWidget* NotificationWidget = CreateWidget<UEasyNotificationWidget>(GetLocalPlayer()->GetPlayerController(GetWorld()), LoadedClass);
 				RootWidget->AddNotificationWidgetToPanel(LayerTag, NotificationWidget, NotificationInfo);
 				OnNotificationAdded.ExecuteIfBound(LayerTag, NotificationWidget);
+				return;
 			}
 			else
 			{
@@ -130,6 +132,7 @@ void UEasyUserInterfaceManager::AddNotificationToPanel(
 			}
 		})
 	);
+	return true;
 }
 
 UEasyPromptQuestion* UEasyUserInterfaceManager::PushQuestionPromptToLayer(

@@ -1,4 +1,4 @@
-﻿// Copyright Elmarath Studio 2025
+﻿// Copyright Elmarath Studio 2025 All Rights Reserved.
 
 #pragma once
 
@@ -7,7 +7,7 @@
 #include "EasyNotificationWidgetPanelInterface.generated.h"
 
 struct FGameplayTag;
-// This class does not need to be modified.
+// 
 UINTERFACE()
 class UEasyNotificationWidgetPanelInterface : public UInterface
 {
@@ -15,7 +15,8 @@ class UEasyNotificationWidgetPanelInterface : public UInterface
 };
 
 /**
- * 
+ * Interface for notification widget panels to handle added notification widgets.
+ * So they have a way of knowing when a new notification is added and their information.
  */
 class EASYUSERINTERFACEMANAGEMENT_API IEasyNotificationWidgetPanelInterface
 {

@@ -1,4 +1,4 @@
-﻿// Copyright Elmarath Studio 2025
+﻿// Copyright Elmarath Studio 2025 All Rights Reserved.
 
 
 #include "EasyUserInterfaceManagement/EasyCommonUIActionRouter.h"
@@ -39,9 +39,4 @@ void FEasyCommonAnalogCursor::SetAnalogMovementEnabled(bool bInIsAnalogMovementE
 	RefreshCursorSettings();
 	RefreshCursorVisibility();
 	ShouldHandleRightAnalog(bIsAnalogMovementEnabled);
-}
-
-void FEasyCommonAnalogCursor::Tick(const float DeltaTime, FSlateApplication& SlateApp, TSharedRef<ICursor> Cursor)
-{
-	
 }
